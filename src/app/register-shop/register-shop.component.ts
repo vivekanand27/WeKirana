@@ -12,4 +12,7 @@ export class RegisterShopComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  register(){
+
+  }
 }
