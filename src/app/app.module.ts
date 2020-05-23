@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 /* Angular material */
 import { MaterialModule } from './angular-material.module';
 import { MatSliderModule } from '@angular/material/slider';
@@ -38,11 +39,20 @@ import {ProductListComponent} from './products/product-list/product-list.compone
     AppRoutingModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      maxOpened: 5,
+      autoDismiss: true,
+      newestOnTop: true,
+      countDuplicates: true,
+      tapToDismiss: true,
+      progressAnimation: 'decreasing'
+    }),
   ],
-  providers: [
-  //  ProductsService
-  ],
+  providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
