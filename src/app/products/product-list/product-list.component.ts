@@ -9,15 +9,17 @@ import { Subscription } from 'rxjs';
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
   private productSubs: Subscription;
+  displayedColumns: string[] = ['name', 'description', 'availableQuantity',  'price'];
+  dataSource: any;
+
   constructor(public productService: ProductsService) { }
 
+
   ngOnInit() {
-    this.productService.getProducts();
-    this.productService.getProductUpdateListener()
-      .subscribe((products: Product[]) => {
-        this.products = products;
-      });
-    console.log(this.productService.getProducts());
+
+    const data = this.productService.getProducts() .subscribe((products) => {
+      this.dataSource = products;
+    });
   }
 
 }

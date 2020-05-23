@@ -1,7 +1,7 @@
 import { Product } from '../models/product/product.model';
 import { Injectable } from '@angular/core';
 
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
@@ -13,9 +13,9 @@ export class ProductsService {
   constructor(private http: HttpClient) {
 
   }
-  getProducts() {
-    this.http
-      .get<{ message: string, products: any }>('http://localhost:3000/api/products')
+  getProducts()  {
+    return this.http
+      .get<{ products: any }>('http://localhost:3000/api/products')
       .pipe(map((productData) => {
         return productData.products.map(product => {
           return {
@@ -27,10 +27,7 @@ export class ProductsService {
           };
         });
       }))
-      .subscribe((data) => {
-        console.log('from service');
-        console.log(data);
-      });
+     ;
   }
 
   getProductUpdateListener() {
@@ -38,15 +35,10 @@ export class ProductsService {
   }
 
   addProduct(product: Product) {
-    console.log(product);
     this.http.post<{ message: string }>('http://localhost:3000/api/products', product)
       .subscribe((responseData) => {
-        debugger;
         console.log('responseData' + responseData);
       });
-    // this.products.push(product);
-    // this.productsUpdated.next([...this.products]);
-    // console.log(this.products);
   }
 
 }
