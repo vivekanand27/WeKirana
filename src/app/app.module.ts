@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,7 +17,7 @@ import {LoginUserComponent} from './user/login-user/login-user.component';
 import {ProductCreateComponent} from './products/product-create/product-create.component';
 import {ProductListComponent} from './products/product-list/product-list.component';
 
-import { ProductsService } from './services/products.service';
+// import { ProductsService } from './services/products.service';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { ProductsService } from './services/products.service';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatSliderModule,
     AppRoutingModule,
@@ -39,7 +41,7 @@ import { ProductsService } from './services/products.service';
     ReactiveFormsModule
   ],
   providers: [
-    ProductsService
+  //  ProductsService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
