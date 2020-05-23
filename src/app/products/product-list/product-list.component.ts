@@ -13,7 +13,7 @@ import {MatSort} from '@angular/material/sort';
 export class ProductListComponent implements OnInit {
   // products: Product[] = [];
   private productSubs: Subscription;
-  displayedColumns: string[] = ['name', 'description', 'availableQuantity',  'price'];
+  displayedColumns: string[] = ['name', 'description', 'availableQuantity',  'price', 'actions'];
   dataSource = new MatTableDataSource();
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
