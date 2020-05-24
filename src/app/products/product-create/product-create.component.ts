@@ -22,6 +22,7 @@ export class ProductCreateComponent implements OnInit {
       return;
     }
     const product: Product = {
+      id: null,
       name: form.value.name,
       description: form.value.description,
       price: form.value.price,

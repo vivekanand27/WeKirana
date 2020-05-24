@@ -35,10 +35,15 @@ export class ProductsService {
   }
 
   addProduct(product: Product) {
-    this.http.post<{ message: string }>('http://localhost:3000/api/products', product)
+   return this.http.post<{ message: string, productId: string }>('http://localhost:3000/api/products', product)
       .subscribe((responseData) => {
-        console.log('responseData' + responseData);
+    product.id = responseData.productId;
+    console.log('responseData' + responseData.productId);
       });
+  }
+
+  deleteProduct(productId: string) {
+   return this.http.delete('http://localhost:3000/api/delete/' + productId);
   }
 
 }

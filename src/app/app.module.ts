@@ -48,8 +48,7 @@ import {ProductListComponent} from './products/product-list/product-list.compone
       autoDismiss: true,
       newestOnTop: true,
       countDuplicates: true,
-      tapToDismiss: true,
-      progressAnimation: 'decreasing'
+      tapToDismiss: true
     }),
   ],
   providers: [],
