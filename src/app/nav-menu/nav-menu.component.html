@@ -8,10 +8,10 @@
           Product
         </mat-expansion-panel-header>
         <mat-nav-list dense>
-          <a mat-list-item routerLink="/app-product-create">Create New Product</a>
+          <a mat-list-item routerLink="/app-product-create" routerLinkActive="mat-accent">Create New Product</a>
         </mat-nav-list>
         <mat-nav-list dense>
-          <a mat-list-item routerLink="/app-product-list">Product List</a>
+          <a mat-list-item routerLink="/app-product-list" routerLinkActive="mat-accent">Product List</a>
         </mat-nav-list>
       </mat-expansion-panel>
       <mat-expansion-panel>
@@ -19,8 +19,8 @@
           User
         </mat-expansion-panel-header>
         <mat-nav-list dense>
-          <a mat-list-item routerLink="/app-register-user">Register</a>
-          <a mat-list-item routerLink="/app-login-user">Login</a>
+          <a mat-list-item routerLink="/app-register-user" routerLinkActive="mat-accent">Register</a>
+          <a mat-list-item routerLink="/app-login-user" routerLinkActive="mat-accent">Login</a>
         </mat-nav-list>
       </mat-expansion-panel>
 
@@ -29,8 +29,7 @@
           Shop
         </mat-expansion-panel-header>
         <mat-nav-list dense>
-
-          <a mat-list-item routerLink="/app-register-shop">Register Shop</a>
+          <a mat-list-item routerLink="/app-register-shop" routerLinkActive="mat-accent">Register Shop</a>
         </mat-nav-list>
       </mat-expansion-panel>
     </mat-accordion>
@@ -51,7 +50,9 @@
       <span class="spacer"></span>
       <ul>
         <li>
-          <a mat-button routerLink="/app-register-user">Sign In</a>
+          <a mat-button routerLink="/app-register-user" routerLinkActive="mat-accent">Log In</a>
+          <!-- <a mat-button routerLink="/app-register-user" routerLinkActive="mat-accent">Log Out</a> -->
+          <a mat-button routerLink="/app-register-shop" routerLinkActive="mat-accent">Sign Up</a>
         </li>
       </ul>
     </mat-toolbar>

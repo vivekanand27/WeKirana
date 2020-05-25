@@ -7,10 +7,11 @@ import { ProductCreateComponent} from './products/product-create/product-create.
 import { ProductListComponent} from './products/product-list/product-list.component';
 
 const routes: Routes = [
-  { path: 'app-register-shop', component: RegisterShopComponent },
+  { path: 'register-shop', component: RegisterShopComponent },
   { path: 'app-register-user', component: RegisterUserComponent },
   { path: 'app-login-user', component: LoginUserComponent },
   { path: 'app-product-create', component: ProductCreateComponent },
+  { path: 'edit-product/:productId', component: ProductCreateComponent },
   { path: 'app-product-list', component: ProductListComponent },
   { path: '', redirectTo: '/app-product-list', pathMatch: 'full' }
 ];

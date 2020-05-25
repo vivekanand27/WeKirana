@@ -34,6 +34,22 @@ export class ProductsService {
     return this.productsUpdated.asObservable();
   }
 
+  getProduct(productId: string) {
+    return this.http
+    .get<Product>('http://localhost:3000/api/product/' + productId);
+  }
+
+  updateProduct(product: Product) {
+    const prod: Product = {
+      id : product.id,
+      name: product.name,
+      description: product.name,
+      availableQuantity: product.availableQuantity,
+      price: product.price
+    };
+    return this.http.put('http://localhost:3000/api/product/' + product.id, prod);
+  }
+
   addProduct(product: Product) {
    return this.http.post<{ message: string, productId: string }>('http://localhost:3000/api/products', product)
       .subscribe((responseData) => {

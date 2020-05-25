@@ -39,9 +39,12 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef> Actions </th>
     <td mat-cell *matCellDef="let element">
-      <button mat-icon-button matTooltip="Click to Edit" class="iconbutton" color="primary">
+      <a mat-icon-button matTooltip="Click to Edit" [routerLink]="['/edit-product',element.id]" class="iconbutton" color="primary">
         <mat-icon aria-label="Edit">edit</mat-icon>
-      </button>
+      </a>
+      <!-- <button mat-icon-button matTooltip="Click to Edit" class="iconbutton" color="primary">
+        <mat-icon aria-label="Edit">edit</mat-icon>
+      </button> -->
       <button mat-icon-button matTooltip="Click to Delete" (click)="onDelete(element.id)" class="iconbutton" color="warn">
           <mat-icon aria-label="Delete">delete</mat-icon>
       </button>

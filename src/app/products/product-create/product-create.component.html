@@ -1,5 +1,5 @@
 <mat-toolbar>
-  <span>Create New Product</span>
+  <span>{{heading}}</span>
 </mat-toolbar>
 <mat-card class="my-card">
   <form class="my-form"  (submit)="onCreateProduct(productForm)" #productForm="ngForm">
@@ -8,26 +8,32 @@
 
       <mat-form-field class="full-width">
         <mat-label>Product Name</mat-label>
-        <input matInput placeholder="Product Name" name="name" ngModel minlength="4" required>
+        <input matInput placeholder="Product Name" name="name" [ngModel]="product?.name" minlength="4" required>
       </mat-form-field>
       <mat-form-field class="full-width">
         <mat-label>Description</mat-label>
-        <input matInput placeholder="Description" name="description" ngModel >
+        <input matInput placeholder="Description" name="description"  [ngModel]="product?.description" >
       </mat-form-field>
       <mat-form-field class="full-width">
         <mat-label>Price</mat-label>
-        <input matInput placeholder="Price" name="price" required ngModel>
+        <input matInput placeholder="Price" name="price" required [ngModel]="product?.price">
       </mat-form-field>
       <mat-form-field class="full-width">
         <mat-label>Available Quantity</mat-label>
-        <input matInput placeholder="Available Quantity" name="availableQuantity" required ngModel>
+        <input matInput placeholder="Available Quantity" name="availableQuantity" required [ngModel]="product?.availableQuantity">
       </mat-form-field>
 
 
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="primary" type="submit"
-    >Create Product</button>
+    <button mat-raised-button color="primary" type="submit">{{saveBtnText}}</button>
+
+    <a mat-raised-button matTooltip="Click to go back to product list"
+      routerLink="/app-product-list" color="warn"> Cancel
+    </a>
+  </mat-card-actions>
+  <mat-card-actions>
+
   </mat-card-actions>
 </form>
 </mat-card>
