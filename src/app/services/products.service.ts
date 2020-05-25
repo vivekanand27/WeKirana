@@ -4,13 +4,14 @@ import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
   private products: Product[] = [];
   private productsUpdated = new Subject<Product[]>();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
 
   }
   getProducts()  {
@@ -36,30 +37,32 @@ export class ProductsService {
 
   getProduct(productId: string) {
     return this.http
-    .get<Product>('http://localhost:3000/api/product/' + productId);
+    .get<Product>('http://localhost:3000/api/products/' + productId);
   }
 
   updateProduct(product: Product) {
     const prod: Product = {
       id : product.id,
       name: product.name,
-      description: product.name,
+      description: product.description,
       availableQuantity: product.availableQuantity,
       price: product.price
     };
-    return this.http.put('http://localhost:3000/api/product/' + product.id, prod);
+    return this.http.put('http://localhost:3000/api/products/' + product.id, prod);
   }
 
   addProduct(product: Product) {
-   return this.http.post<{ message: string, productId: string }>('http://localhost:3000/api/products', product)
-      .subscribe((responseData) => {
-    product.id = responseData.productId;
-    console.log('responseData' + responseData.productId);
-      });
+   return this.http
+        .post<{ message: string, productId: string }>('http://localhost:3000/api/products', product)
+        .subscribe((responseData) => {
+          product.id = responseData.productId;
+          console.log('responseData' + responseData.productId);
+          this.router.navigate(['/']);
+        });
   }
 
   deleteProduct(productId: string) {
-   return this.http.delete('http://localhost:3000/api/delete/' + productId);
+   return this.http.delete('http://localhost:3000/api/products/' + productId);
   }
 
 }

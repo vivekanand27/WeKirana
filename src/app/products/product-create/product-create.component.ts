@@ -21,16 +21,19 @@ export class ProductCreateComponent implements OnInit {
   product: Product;
   saveBtnText: string;
   heading: string;
+  isLoading = false;
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('productId')) {
+        this.isLoading = true;
         this.mode = 'edit';
         this.saveBtnText = 'Update';
         this.heading = 'Update Product';
         this.productId = paramMap.get('productId');
         this.productService.getProduct(this.productId)
           .subscribe((product) => {
+            this.isLoading = false;
             this.product = product;
           });
       } else {
@@ -42,11 +45,12 @@ export class ProductCreateComponent implements OnInit {
     });
   }
 
-  onCreateProduct(form: NgForm) {
+  onSaveProduct(form: NgForm) {
     if (form.invalid) {
       this.toastr.warning('Please fill correct product details', 'Warning');
       return;
     }
+    this.isLoading = true;
     const productForm: Product = {
       id: null,
       name: form.value.name,
@@ -58,12 +62,13 @@ export class ProductCreateComponent implements OnInit {
       this.productService.addProduct(productForm);
       form.resetForm();
       this.toastr.success('Product added successfully!', 'Success');
+      this.isLoading = false;
     } else {
       productForm.id = this.productId;
       this.productService.updateProduct(productForm)
           .subscribe( (response) => {
             this.toastr.success('Product updated successfully!', 'Success');
-            console.log(response);
+            this.isLoading = false;
           });
     }
 

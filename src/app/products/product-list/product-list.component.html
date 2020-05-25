@@ -3,9 +3,11 @@
     <input matInput (keyup)="applyFilter($event)" placeholder="value">
 </mat-form-field>
 
-<div class="mat-elevation-z8">
+<mat-spinner *ngIf="isLoading"></mat-spinner>
 
-<table mat-table matSort [dataSource]="dataSource">
+<div class="mat-elevation-z8" [hidden]="isLoading">
+
+<table mat-table matSort [dataSource]="dataSource"  >
 
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
@@ -56,6 +58,6 @@
 </table>
 
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[10, 20, 50, 100, 500]" showFirstLastButtons></mat-paginator>
 </div>
 

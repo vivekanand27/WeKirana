@@ -16,6 +16,7 @@ export class ProductListComponent implements OnInit {
   private productSubs: Subscription;
   displayedColumns: string[] = ['name', 'description', 'availableQuantity',  'price', 'actions'];
   dataSource = new MatTableDataSource();
+  isLoading = false;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -25,6 +26,7 @@ export class ProductListComponent implements OnInit {
 
 
   ngOnInit() {
+    this.isLoading = true;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.loadProducts();
@@ -33,6 +35,7 @@ export class ProductListComponent implements OnInit {
   loadProducts() {
     this.productService.getProducts() .subscribe((products) => {
       this.dataSource.data = products;
+      this.isLoading = false;
     });
   }
 
