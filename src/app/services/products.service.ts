@@ -24,7 +24,8 @@ export class ProductsService {
             availableQuantity: product.availableQuantity,
             description: product.description,
             price: product.price,
-            id: product._id
+            id: product._id,
+            imagePath: product.imagePath
           };
         });
       }))
@@ -35,9 +36,11 @@ export class ProductsService {
     return this.productsUpdated.asObservable();
   }
 
-  getProduct(productId: string) {
+  getProduct(id: string) {
     return this.http
-    .get<Product>('http://localhost:3000/api/products/' + productId);
+    .get<{_id: string, name: string, description: string,
+        availableQuantity: number, price: number, imagePath: string }>
+    ('http://localhost:3000/api/products/' + id);
   }
 
   updateProduct(product: Product) {
@@ -51,14 +54,17 @@ export class ProductsService {
     return this.http.put('http://localhost:3000/api/products/' + product.id, prod);
   }
 
-  addProduct(product: Product) {
-   return this.http
-        .post<{ message: string, productId: string }>('http://localhost:3000/api/products', product)
-        .subscribe((responseData) => {
-          product.id = responseData.productId;
-          console.log('responseData' + responseData.productId);
-          this.router.navigate(['/']);
-        });
+  addProduct(product: Product, image: string) {
+    const postData = new FormData();
+    postData.append('name', product.name);
+    postData.append('description', product.description);
+    postData.append('availableQuantity', String(product.availableQuantity));
+    postData.append('price', String(product.price));
+    postData.append('image', image, product.name);
+
+    return this.http
+      .post<{ message: string, product: Product }>
+      ('http://localhost:3000/api/products', postData);
   }
 
   deleteProduct(productId: string) {

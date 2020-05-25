@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule} from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 /* Angular material */
 import { MaterialModule } from './angular-material.module';
@@ -38,7 +38,6 @@ import {ProductListComponent} from './products/product-list/product-list.compone
     MatSliderModule,
     AppRoutingModule,
     MaterialModule,
-    FormsModule,
     ReactiveFormsModule,
     ToastrModule.forRoot({
       timeOut: 10000,
