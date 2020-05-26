@@ -60,7 +60,6 @@ export class ProductCreateComponent implements OnInit {
               price: this.product.price,
               image: this.product.imagePath,
             });
-            console.log(this.form);
             this.imagePreview = this.form.value.image;
           });
       } else {
@@ -98,7 +97,8 @@ export class ProductCreateComponent implements OnInit {
 
     } else {
       productForm.id = this.productId;
-      this.productService.updateProduct(productForm)
+      productForm.imagePath = this.product.imagePath;
+      this.productService.updateProduct(productForm, image)
         .subscribe((response) => {
           this.toastr.success('Product updated successfully.', 'Success');
           this.isLoading = false;

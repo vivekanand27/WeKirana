@@ -43,28 +43,50 @@ export class ProductsService {
     ('http://localhost:3000/api/products/' + id);
   }
 
-  updateProduct(product: Product) {
-    const prod: Product = {
-      id : product.id,
-      name: product.name,
-      description: product.description,
-      availableQuantity: product.availableQuantity,
-      price: product.price
-    };
-    return this.http.put('http://localhost:3000/api/products/' + product.id, prod);
+  updateProduct(product: Product, image: File | string) {
+    let productData: Product | FormData;
+    if (typeof(image) === 'object') {
+      productData = new FormData();
+      productData.append('id', product.id);
+      productData.append('name', product.name);
+      productData.append('description', product.description);
+      productData.append('availableQuantity', String(product.availableQuantity));
+      productData.append('price', String(product.price));
+      productData.append('image', image, product.name);
+    } else {
+      productData = {
+        id: product.id,
+        name : product.name,
+        description: product.description,
+        price: product.price,
+        availableQuantity: product.availableQuantity,
+        imagePath: product.imagePath
+      };
+    }
+
+    // const prod: Product = {
+    //   id : product.id,
+    //   name: product.name,
+    //   description: product.description,
+    //   availableQuantity: product.availableQuantity,
+    //   price: product.price
+    // };
+    console.log(productData);
+    return this.http
+    .put('http://localhost:3000/api/products/' + product.id, productData);
   }
 
   addProduct(product: Product, image: string) {
-    const postData = new FormData();
-    postData.append('name', product.name);
-    postData.append('description', product.description);
-    postData.append('availableQuantity', String(product.availableQuantity));
-    postData.append('price', String(product.price));
-    postData.append('image', image, product.name);
+    const productData = new FormData();
+    productData.append('name', product.name);
+    productData.append('description', product.description);
+    productData.append('availableQuantity', String(product.availableQuantity));
+    productData.append('price', String(product.price));
+    productData.append('image', image, product.name);
 
     return this.http
       .post<{ message: string, product: Product }>
-      ('http://localhost:3000/api/products', postData);
+      ('http://localhost:3000/api/products', productData);
   }
 
   deleteProduct(productId: string) {
