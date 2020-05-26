@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-import { ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 /* Angular material */
 import { MaterialModule } from './angular-material.module';
@@ -14,7 +14,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { NavMenuComponent} from './nav-menu/nav-menu.component';
 import {RegisterShopComponent} from './shop/register-shop/register-shop.component';
 import {RegisterUserComponent} from './user/register-user/register-user.component';
-import {LoginUserComponent} from './user/login-user/login-user.component';
+import {LoginComponent} from './auth/login/login.component';
 import {ProductCreateComponent} from './products/product-create/product-create.component';
 import {ProductListComponent} from './products/product-list/product-list.component';
 
@@ -27,7 +27,7 @@ import {ProductListComponent} from './products/product-list/product-list.compone
     NavMenuComponent,
     RegisterShopComponent,
     RegisterUserComponent,
-    LoginUserComponent,
+    LoginComponent,
     ProductCreateComponent,
     ProductListComponent
   ],
@@ -38,6 +38,7 @@ import {ProductListComponent} from './products/product-list/product-list.compone
     MatSliderModule,
     AppRoutingModule,
     MaterialModule,
+    FormsModule,
     ReactiveFormsModule,
     ToastrModule.forRoot({
       timeOut: 10000,
