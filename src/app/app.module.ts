@@ -15,6 +15,7 @@ import { NavMenuComponent} from './nav-menu/nav-menu.component';
 import {RegisterShopComponent} from './shop/register-shop/register-shop.component';
 import {RegisterUserComponent} from './user/register-user/register-user.component';
 import {LoginComponent} from './auth/login/login.component';
+import {SignupComponent} from './auth/signup/sigup.component';
 import {ProductCreateComponent} from './products/product-create/product-create.component';
 import {ProductListComponent} from './products/product-list/product-list.component';
 
@@ -28,6 +29,7 @@ import {ProductListComponent} from './products/product-list/product-list.compone
     RegisterShopComponent,
     RegisterUserComponent,
     LoginComponent,
+    SignupComponent,
     ProductCreateComponent,
     ProductListComponent
   ],
