@@ -3,7 +3,7 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-accordion>
-      <mat-expansion-panel>
+      <mat-expansion-panel *ngIf="userIsAuthenticated">
         <mat-expansion-panel-header>
           Product
         </mat-expansion-panel-header>
@@ -14,7 +14,7 @@
           <a mat-list-item routerLink="/app-product-list" routerLinkActive="mat-accent">Product List</a>
         </mat-nav-list>
       </mat-expansion-panel>
-      <mat-expansion-panel>
+      <mat-expansion-panel *ngIf="userIsAuthenticated">
         <mat-expansion-panel-header>
           User
         </mat-expansion-panel-header>
@@ -24,7 +24,7 @@
         </mat-nav-list>
       </mat-expansion-panel>
 
-      <mat-expansion-panel>
+      <mat-expansion-panel *ngIf="userIsAuthenticated">
         <mat-expansion-panel-header>
           Shop
         </mat-expansion-panel-header>
@@ -49,11 +49,15 @@
       <span>WeKirana Management System</span>
       <span class="spacer"></span>
       <ul>
-        <li>
+        <li *ngIf="!userIsAuthenticated">
           <a mat-button routerLink="/app-login" routerLinkActive="mat-accent">Login</a>
           <!-- <a mat-button routerLink="/app-register-user" routerLinkActive="mat-accent">Log Out</a> -->
           <a mat-button routerLink="/app-signup" routerLinkActive="mat-accent">Sign Up</a>
         </li>
+        <li *ngIf="userIsAuthenticated">
+          <button mat-button>Logout</button>
+        </li>
+
       </ul>
     </mat-toolbar>
 

@@ -12,6 +12,7 @@ import { User } from 'src/app/models/user/user.model';
 export class LoginComponent {
  isLoading = false;
 
+
  constructor(public authService: AuthService,
              private toastr: ToastrService) {}
 
@@ -24,9 +25,8 @@ export class LoginComponent {
     email : form.value.email,
     password : form.value.password
    };
-   this.authService.login(user).subscribe(res => {
-    console.log(res);
-    this.toastr.success('Login success');
-   });
+   this.authService.login(user);
  }
+
+
 }
