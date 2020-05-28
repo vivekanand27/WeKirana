@@ -18,7 +18,7 @@ export class SignupComponent {
  }
 
  onSignup(form: NgForm) {
-   console.log(form.value);
+   // console.log(form.value);
    if (form.invalid) {
      return;
    }
@@ -29,7 +29,7 @@ export class SignupComponent {
 
    this.authService.createUser(user)
    .subscribe( (response) => {
-     console.log(response);
+     // console.log(response);
      this.toastr.success('User created successfully.', 'Success');
    });
  }

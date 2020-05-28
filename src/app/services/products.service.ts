@@ -71,7 +71,7 @@ export class ProductsService {
     //   availableQuantity: product.availableQuantity,
     //   price: product.price
     // };
-    console.log(productData);
+    // console.log(productData);
     return this.http
     .put('http://localhost:3000/api/products/' + product.id, productData);
   }

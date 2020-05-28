@@ -17,7 +17,7 @@ export class LoginComponent {
              private toastr: ToastrService) {}
 
  onLogin(form: NgForm) {
-   console.log(form.value);
+   this.isLoading = true;
    if (form.invalid) {
      return;
    }
@@ -26,6 +26,7 @@ export class LoginComponent {
     password : form.value.password
    };
    this.authService.login(user);
+   this.isLoading = false;
  }
 
 

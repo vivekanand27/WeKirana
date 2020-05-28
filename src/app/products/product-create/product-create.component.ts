@@ -92,7 +92,7 @@ export class ProductCreateComponent implements OnInit {
         this.form.reset();
         this.toastr.success('Product added successfully!', 'Success');
         this.isLoading = false;
-        this.router.navigate(['/']);
+        this.router.navigate(['/app-product-list']);
       });
 
     } else {
@@ -102,7 +102,7 @@ export class ProductCreateComponent implements OnInit {
         .subscribe((response) => {
           this.toastr.success('Product updated successfully.', 'Success');
           this.isLoading = false;
-          this.router.navigate(['/']);
+          this.router.navigate(['/app-product-list']);
         });
     }
   }

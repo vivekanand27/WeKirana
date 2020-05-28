@@ -23,6 +23,7 @@ export class NavMenuComponent implements OnInit, OnDestroy {
               private authService: AuthService) {}
 
     ngOnInit() {
+      this.userIsAuthenticated = this.authService.getIsAuth();
       this.authListenerSubs = this.authService
         .getAuthStatusListener()
         .subscribe(isAuthenticated => {
@@ -31,6 +32,10 @@ export class NavMenuComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+      this.authListenerSubs.unsubscribe();
+    }
 
+    onLogout() {
+      this.authService.logout();
     }
 }
