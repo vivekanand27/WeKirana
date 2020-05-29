@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-product-list',
@@ -17,11 +18,13 @@ export class ProductListComponent implements OnInit {
   displayedColumns: string[] = ['name', 'description', 'availableQuantity',  'price', 'actions'];
   dataSource = new MatTableDataSource();
   isLoading = false;
+  userId: string;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(public productService: ProductsService,
+              private authService: AuthService,
               private toastr: ToastrService) { }
 
 
@@ -34,6 +37,7 @@ export class ProductListComponent implements OnInit {
 
   loadProducts() {
     this.productService.getProducts() .subscribe((products) => {
+      this.userId = this.authService.getUserId();
       this.dataSource.data = products;
       this.isLoading = false;
     });

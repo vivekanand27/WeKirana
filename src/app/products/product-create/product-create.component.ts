@@ -51,7 +51,8 @@ export class ProductCreateComponent implements OnInit {
               description: prodData.description,
               availableQuantity: prodData.availableQuantity,
               price: prodData.price,
-              imagePath: prodData.imagePath
+              imagePath: prodData.imagePath,
+              createdBy: null
             };
             this.form.setValue({
               name : this.product.name,
@@ -82,7 +83,8 @@ export class ProductCreateComponent implements OnInit {
       name: this.form.value.name,
       description: this.form.value.description,
       price: this.form.value.price,
-      availableQuantity: this.form.value.availableQuantity
+      availableQuantity: this.form.value.availableQuantity,
+      createdBy : null
     };
     const image = this.form.value.image;
     if (this.mode === 'create') {

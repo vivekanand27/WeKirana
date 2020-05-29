@@ -6,4 +6,5 @@ export interface Product {
   availableQuantity: number;
   // image?: File;
   imagePath?: string;
+  createdBy: string;
 }

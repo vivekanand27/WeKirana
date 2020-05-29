@@ -25,7 +25,8 @@ export class ProductsService {
             description: product.description,
             price: product.price,
             id: product._id,
-            imagePath: product.imagePath
+            imagePath: product.imagePath,
+            createdBy: product.createdBy
           };
         });
       }))
@@ -38,8 +39,13 @@ export class ProductsService {
 
   getProduct(id: string) {
     return this.http
-    .get<{_id: string, name: string, description: string,
-        availableQuantity: number, price: number, imagePath: string }>
+    .get<{_id: string,
+          name: string,
+          description: string,
+          availableQuantity: number,
+          price: number,
+          imagePath: string,
+          createdBy: string }>
     ('http://localhost:3000/api/products/' + id);
   }
 
@@ -60,7 +66,8 @@ export class ProductsService {
         description: product.description,
         price: product.price,
         availableQuantity: product.availableQuantity,
-        imagePath: product.imagePath
+        imagePath: product.imagePath,
+        createdBy: null
       };
     }
 
