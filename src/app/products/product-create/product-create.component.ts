@@ -1,21 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Product } from 'src/app/models/product/product.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProductsService } from 'src/app/services/products.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { mimeType } from './mime-type.validator';
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
+
 @Component({
   selector: 'app-product-create',
   templateUrl: './product-create.component.html',
   styleUrls: ['./product-create.component.css'],
 })
-export class ProductCreateComponent implements OnInit {
-  constructor(public productService: ProductsService,
-              private toastr: ToastrService,
-              public route: ActivatedRoute,
-              private router: Router
-  ) { }
+export class ProductCreateComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   mode = 'create';
   productId: string;
@@ -25,8 +23,21 @@ export class ProductCreateComponent implements OnInit {
   isLoading = false;
   form: FormGroup;
   imagePreview: string;
+  private authStatusSub: Subscription;
+
+  constructor(public productService: ProductsService,
+              private authService: AuthService,
+              private toastr: ToastrService,
+              public route: ActivatedRoute,
+              private router: Router
+  ) { }
+
 
   ngOnInit(): void {
+    this.authStatusSub = this.authService.getAuthStatusListener()
+    .subscribe( authStatus => {
+      this.isLoading = false;
+    });
     this.form = new FormGroup({
       // id: new FormControl(null, {}),
       name: new FormControl(null, { validators: [Validators.required, Validators.minLength(3)] }),
@@ -118,6 +129,10 @@ export class ProductCreateComponent implements OnInit {
       this.imagePreview = reader.result as string;
     };
     reader.readAsDataURL(file);
+  }
+
+  ngOnDestroy() {
+    this.authStatusSub.unsubscribe();
   }
 
 }

@@ -49,9 +49,14 @@ export class ProductListComponent implements OnInit {
   }
 
   onDelete(productId) {
+    this.isLoading = true;
     this.productService.deleteProduct(productId).subscribe(() => {
       this.loadProducts();
       this.toastr.success( 'Product deleted successfully'  , 'Success');
+      this.isLoading = false;
+    },
+    () => {
+      this.isLoading = false;
     });
   }
 

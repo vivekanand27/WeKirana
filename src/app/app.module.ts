@@ -19,6 +19,7 @@ import {SignupComponent} from './auth/signup/sigup.component';
 import {ProductCreateComponent} from './products/product-create/product-create.component';
 import {ProductListComponent} from './products/product-list/product-list.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { ErrorInterceptor } from './error-interceptor';
 
 // import { ProductsService } from './services/products.service';
 
@@ -55,7 +56,8 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     }),
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

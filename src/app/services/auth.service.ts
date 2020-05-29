@@ -36,7 +36,14 @@ export class AuthService {
       email: user.email,
       password: user.password
     };
-    return this.http.post('http://localhost:3000/api/user/signup', authData);
+    return this.http.post('http://localhost:3000/api/user/signup', authData)
+    .subscribe(() => {
+      this.toastr.success('User created successfully.', 'Success');
+      this.router.navigate(['/app-login']);
+    }, error => {
+      this.toastr.error('Some error occured.', 'Error');
+      this.authStatusListener.next(false);
+    });
   }
 
   autoAuthUser() {
@@ -78,7 +85,10 @@ export class AuthService {
         this.saveAuthData(token, expirationDate, this.userId);
         this.router.navigate(['/app-product-list']);
       }
-     });
+     }, error => {
+      this.authStatusListener.next(false);
+    }
+     );
   }
 
   getUserId() {
