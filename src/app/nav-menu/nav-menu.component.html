@@ -19,8 +19,8 @@
           User
         </mat-expansion-panel-header>
         <mat-nav-list dense>
-          <a mat-list-item routerLink="/app-register-user" routerLinkActive="mat-accent">Register</a>
-          <a mat-list-item routerLink="/app-login-user" routerLinkActive="mat-accent">Login</a>
+          <a mat-list-item routerLink="/auth/app-signup" routerLinkActive="mat-accent">Register</a>
+          <a mat-list-item routerLink="/auth/app-login" routerLinkActive="mat-accent">Login</a>
         </mat-nav-list>
       </mat-expansion-panel>
 
@@ -50,9 +50,9 @@
       <span class="spacer"></span>
       <ul>
         <li *ngIf="!userIsAuthenticated">
-          <a mat-button routerLink="/app-login" routerLinkActive="mat-accent">Login</a>
+          <a mat-button routerLink="/auth/app-login" routerLinkActive="mat-accent">Login</a>
           <!-- <a mat-button routerLink="/app-register-user" routerLinkActive="mat-accent">Log Out</a> -->
-          <a mat-button routerLink="/app-signup" routerLinkActive="mat-accent">Sign Up</a>
+          <a mat-button routerLink="/auth/app-signup" routerLinkActive="mat-accent">Sign Up</a>
         </li>
         <li *ngIf="userIsAuthenticated">
           <button (click)="onLogout()" mat-button>Logout</button>

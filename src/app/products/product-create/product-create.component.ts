@@ -116,6 +116,8 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
           this.toastr.success('Product updated successfully.', 'Success');
           this.isLoading = false;
           this.router.navigate(['/app-product-list']);
+        }, () => {
+          this.isLoading = false;
         });
     }
   }

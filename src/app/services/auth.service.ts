@@ -6,6 +6,9 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
+import { environment } from '../../environments/environment';
+const BACKEND_URL = environment.apiUrl + '/user';
+
 @Injectable({ providedIn: 'root'})
 export class AuthService {
   private token: string;
@@ -36,10 +39,10 @@ export class AuthService {
       email: user.email,
       password: user.password
     };
-    return this.http.post('http://localhost:3000/api/user/signup', authData)
+    return this.http.post(BACKEND_URL + '/signup', authData)
     .subscribe(() => {
       this.toastr.success('User created successfully.', 'Success');
-      this.router.navigate(['/app-login']);
+      this.router.navigate(['/auth/app-login']);
     }, error => {
       this.toastr.error('Some error occured.', 'Error');
       this.authStatusListener.next(false);
@@ -69,7 +72,7 @@ export class AuthService {
     };
     return this.http
     .post<{token: string, expiresIn: number, userId: string}>
-    ('http://localhost:3000/api/user/login', authData)
+    (BACKEND_URL + '/login', authData)
     .subscribe(res => {
       const token = res.token;
       this.token = token;
@@ -102,7 +105,7 @@ export class AuthService {
     this.authStatusListener.next(false);
     this.clearAuthData();
     clearTimeout(this.tokenTimer);
-    this.router.navigate(['/app-login']);
+    this.router.navigate(['/auth/app-login']);
     this.toastr.success('Logged out successfully.', 'Success');
   }
 

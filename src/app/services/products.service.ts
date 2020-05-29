@@ -5,6 +5,8 @@ import { Subject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
+const BACKEND_URL = environment.apiUrl + '/products';
 
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
@@ -16,7 +18,7 @@ export class ProductsService {
   }
   getProducts()  {
     return this.http
-      .get<{ products: any }>('http://localhost:3000/api/products')
+      .get<{ products: any }>(BACKEND_URL)
       .pipe(map((productData) => {
         return productData.products.map(product => {
           return {
@@ -46,7 +48,7 @@ export class ProductsService {
           price: number,
           imagePath: string,
           createdBy: string }>
-    ('http://localhost:3000/api/products/' + id);
+    (BACKEND_URL + '/' + id);
   }
 
   updateProduct(product: Product, image: File | string) {
@@ -80,7 +82,7 @@ export class ProductsService {
     // };
     // console.log(productData);
     return this.http
-    .put('http://localhost:3000/api/products/' + product.id, productData);
+    .put(BACKEND_URL + '/' + product.id, productData);
   }
 
   addProduct(product: Product, image: string) {
@@ -93,11 +95,11 @@ export class ProductsService {
 
     return this.http
       .post<{ message: string, product: Product }>
-      ('http://localhost:3000/api/products', productData);
+      (BACKEND_URL , productData);
   }
 
   deleteProduct(productId: string) {
-   return this.http.delete('http://localhost:3000/api/products/' + productId);
+   return this.http.delete(BACKEND_URL + '/' + productId);
   }
 
 }
