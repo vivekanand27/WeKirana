@@ -1,19 +1,60 @@
 <mat-toolbar>
-  <span>Signup</span>
+  <span>Create New User</span>
 </mat-toolbar>
 
 <mat-card>
 
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <form (submit)="onSignup(signupForm)" #signupForm="ngForm" *ngIf="!isLoading">
+
+    <mat-form-field class="full-width">
+      <mat-label>First Name</mat-label>
+      <input matInput ngModel type="text" placeholder="First Name" name="firstName" required>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Last Name</mat-label>
+      <input matInput ngModel type="text" placeholder="Last Name" name="lastName" required>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Contact Number</mat-label>
+      <input matInput name="contactNumber" ngModel type="number" placeholder="Contact Number">
+    </mat-form-field>
+
     <mat-form-field>
       <input matInput name="email" ngModel type="email" placeholder="E-Mail" #emailInput="ngModel" required email>
-      <mat-error *ngIf="emailInput.invalid">Please enter a valid email.</mat-error>
+      <!-- <mat-error *ngIf="emailInput.invalid">Please enter a valid email.</mat-error> -->
     </mat-form-field>
+
     <mat-form-field>
       <input type="password" name="password" ngModel matInput placeholder="Password" #passwordInput="ngModel" required>
-      <mat-error *ngIf="passwordInput.invalid">Please enter a valid password.</mat-error>
+      <!-- <mat-error *ngIf="passwordInput.invalid">Please enter a valid password.</mat-error> -->
     </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Confirm Password</mat-label>
+      <input matInput placeholder="Confirm Password" ngModel type="password" name="confirmPassword" required>
+    </mat-form-field>
+
+    <label id="example-radio-group-label">Do you own a shop?</label>
+    <mat-radio-group required ngModel name="isShopOwner"
+      aria-labelledby="example-radio-group-label" class="shop-radio-group"
+      [(ngModel)]="isShopOwner">
+      <mat-radio-button class="shop-radio-button" [checked]="isShopOwner"  color="primary" [value]="true">Yes</mat-radio-button>
+      <mat-radio-button class="shop-radio-button" [checked]="!isShopOwner" color="primary" [value]="false">No</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-form-field *ngIf="isShopOwner" class="full-width">
+      <mat-label>Shop Name</mat-label>
+      <input matInput type="text" ngModel placeholder="Shop Name" name="shopName" required>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="isShopOwner" class="full-width">
+      <mat-label>Shop Addess</mat-label>
+      <input matInput type="text" ngModel placeholder="Shop Address" name="shopAddress" required>
+    </mat-form-field>
+
     <button mat-raised-button color="primary" type="submit">Sign Up</button>
   </form>
 </mat-card>

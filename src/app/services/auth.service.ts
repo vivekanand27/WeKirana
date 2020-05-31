@@ -35,16 +35,17 @@ export class AuthService {
   }
 
   createUser(user: User) {
-    const authData: AuthData = {
-      email: user.email,
-      password: user.password
-    };
-    return this.http.post(BACKEND_URL + '/signup', authData)
+    // const authData: AuthData = {
+    //   firsatName:
+    //   email: user.email,
+    //   password: user.password
+    // };
+    return this.http.post(BACKEND_URL + '/signup', user)
     .subscribe(() => {
       this.toastr.success('User created successfully.', 'Success');
       this.router.navigate(['/auth/app-login']);
     }, error => {
-      this.toastr.error('Some error occured.', 'Error');
+      // this.toastr.error('Some error occured.', 'Error');
       this.authStatusListener.next(false);
     });
   }
@@ -65,7 +66,7 @@ export class AuthService {
     }
   }
 
-  login(user: User) {
+  login(user: AuthData) {
     const authData: AuthData = {
       email: user.email,
       password: user.password

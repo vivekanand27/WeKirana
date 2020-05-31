@@ -1,7 +1,11 @@
 export interface User {
-email: string;
-
-password: string;
-
-
+  _id?: string;
+  firstName: string;
+  lastName: string;
+  contactNumber?: number;
+  isShopOwner: boolean;
+  shopName?: string;
+  shopAddress?: string;
+  email: string;
+  password: string;
 }
