@@ -4,6 +4,8 @@ import { MaterialModule } from '../angular-material.module';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+import { MatTableExporterModule } from 'mat-table-exporter';
+
 import { ProductCreateComponent} from './product-create/product-create.component';
 import { ProductListComponent} from './product-list/product-list.component';
 
@@ -16,7 +18,8 @@ import { ProductListComponent} from './product-list/product-list.component';
     CommonModule,
     ReactiveFormsModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    MatTableExporterModule
   ]
 })
 

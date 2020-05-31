@@ -1,13 +1,22 @@
+<div *ngIf="!isLoading">
+  <button mat-raised-button color="primary"  [ngClass]="'first-button'"
+  [routerLink]="['/app-product-create']" >Create New Product</button>
+
+  <button mat-raised-button color="primary"
+  (click)="exporter.exportTable('xlsx')">Export as Excel</button>
+</div>
+
 <mat-form-field>
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="value">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="value">
 </mat-form-field>
 
 <mat-spinner *ngIf="isLoading"></mat-spinner>
 
 <div class="mat-elevation-z8" [hidden]="isLoading">
 
-<table mat-table matSort [dataSource]="dataSource"  >
+<table matTableExporter  mat-table matSort [dataSource]="dataSource" #exporter="matTableExporter"
+[hiddenColumns]="[5]" [exporter]= "customExporter"   >
 
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
@@ -17,8 +26,6 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
     <td mat-cell *matCellDef="let element"> {{element.name}} </td>
   </ng-container>
-
-
 
   <!-- description Column -->
   <ng-container matColumnDef="description">
@@ -38,12 +45,10 @@
     <td mat-cell *matCellDef="let element"> {{element.price}} </td>
   </ng-container>
 
-   <!-- image Column -->
-   <ng-container matColumnDef="image">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Image </th>
-    <td mat-cell *matCellDef="let element" class="post-image">
-     <img [src]="element.imagePath" [alt]="element.title">
-     </td>
+  <!-- Last Updated On Column -->
+  <ng-container matColumnDef="updatedOn">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Updated On </th>
+    <td mat-cell *matCellDef="let element"> {{element.updatedOn}} </td>
   </ng-container>
 
   <ng-container matColumnDef="actions">

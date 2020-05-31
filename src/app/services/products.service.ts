@@ -28,7 +28,10 @@ export class ProductsService {
             price: product.price,
             id: product._id,
             imagePath: product.imagePath,
-            createdBy: product.createdBy
+            createdBy: product.createdBy,
+            createdOn: product.createdOn,
+            updatedBy: product.updatedBy,
+            updatedOn: product.updatedOn,
           };
         });
       }))
