@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 import { environment } from '../../environments/environment';
+import { map } from 'rxjs/operators';
 const BACKEND_URL = environment.apiUrl + '/user';
 
 @Injectable({ providedIn: 'root'})
@@ -16,6 +17,7 @@ export class AuthService {
   private isAuthenticated = false;
   private tokenTimer: any;
   private userId: string;
+  private userName: string;
 
   constructor(private http: HttpClient,
               private router: Router,
@@ -32,6 +34,40 @@ export class AuthService {
 
   getAuthStatusListener() {
     return this.authStatusListener.asObservable();
+  }
+
+  getUsers()  {
+    return this.http
+      .get<User[]>(BACKEND_URL + '/all-users');
+    //   .pipe(map((userList) => {
+    //     return productData.products.map(product => {
+    //       return {
+    //         name: product.name,
+    //         availableQuantity: product.availableQuantity,
+    //         description: product.description,
+    //         price: product.price,
+    //         id: product._id,
+    //         imagePath: product.imagePath,
+    //         createdBy: product.createdBy,
+    //         createdOn: product.createdOn,
+    //         updatedBy: product.updatedBy,
+    //         updatedOn: product.updatedOn,
+    //       };
+    //     });
+    //   }))
+    //  ;
+  }
+
+  getUser(id: string) {
+    return this.http
+    .get<{_id: string,
+          name: string,
+          description: string,
+          availableQuantity: number,
+          price: number,
+          imagePath: string,
+          createdBy: string }>
+    (BACKEND_URL + '/' + id);
   }
 
   createUser(user: User) {
@@ -72,9 +108,10 @@ export class AuthService {
       password: user.password
     };
     return this.http
-    .post<{token: string, expiresIn: number, userId: string}>
+    .post<{token: string, expiresIn: number, userId: string, userName: string}>
     (BACKEND_URL + '/login', authData)
     .subscribe(res => {
+      console.log(res);
       const token = res.token;
       this.token = token;
       if (token) {
@@ -85,8 +122,9 @@ export class AuthService {
         const now = new Date();
         const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
         this.userId = res.userId;
+        this.userName = res.userName;
         // this.toastr.success('Logged in successfully.', 'Success');
-        this.saveAuthData(token, expirationDate, this.userId);
+        this.saveAuthData(token, expirationDate, this.userId, this.userName);
         this.router.navigate(['/app-product-list']);
       }
      }, error => {
@@ -117,9 +155,10 @@ export class AuthService {
     }, duration * 1000);
   }
 
-  private saveAuthData(token: string, expirationDate: Date, userId: string) {
+  private saveAuthData(token: string, expirationDate: Date, userId: string, userName: string) {
     localStorage.setItem('token', token);
     localStorage.setItem('userId', userId);
+    localStorage.setItem('userName', userName);
     localStorage.setItem('expiration', expirationDate.toISOString());
   }
 
@@ -127,6 +166,7 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('expiration');
     localStorage.removeItem('userId');
+    localStorage.removeItem('userName');
   }
 
   private getAuthData() {

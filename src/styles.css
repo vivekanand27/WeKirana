@@ -24,4 +24,7 @@ th.mat-sort-header-sorted {
   margin: auto;
 }
 
+.mat-nav-list a.active {
+  background: blue;
+}
 

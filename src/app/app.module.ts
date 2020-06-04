@@ -13,6 +13,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { NavMenuComponent} from './nav-menu/nav-menu.component';
 import { RegisterShopComponent} from './shop/register-shop/register-shop.component';
 import { RegisterUserComponent} from './user/register-user/register-user.component';
+import { UserListComponent } from './user/user-list/user-list.component';
 
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { ErrorInterceptor } from './error-interceptor';
@@ -23,7 +24,8 @@ import { ProductModule } from './products/products.module';
     AppComponent,
     NavMenuComponent,
     RegisterShopComponent,
-    RegisterUserComponent
+    RegisterUserComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,

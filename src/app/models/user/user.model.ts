@@ -8,4 +8,6 @@ export interface User {
   shopAddress?: string;
   email: string;
   password: string;
+  createdOn?: string;
+  updatedOn?: string;
 }

@@ -18,6 +18,28 @@ export class ProductsService {
   }
   getProducts()  {
     return this.http
+      .get<{ products: any }>(BACKEND_URL + '/users-product')
+      .pipe(map((productData) => {
+        return productData.products.map(product => {
+          return {
+            name: product.name,
+            availableQuantity: product.availableQuantity,
+            description: product.description,
+            price: product.price,
+            id: product._id,
+            imagePath: product.imagePath,
+            createdBy: product.createdBy,
+            createdOn: product.createdOn,
+            updatedBy: product.updatedBy,
+            updatedOn: product.updatedOn,
+          };
+        });
+      }))
+     ;
+  }
+
+  getAllProducts()  {
+    return this.http
       .get<{ products: any }>(BACKEND_URL)
       .pipe(map((productData) => {
         return productData.products.map(product => {

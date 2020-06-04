@@ -19,25 +19,24 @@
           User
         </mat-expansion-panel-header>
         <mat-nav-list dense>
+          <a mat-list-item routerLink="/app-user-list" routerLinkActive="mat-accent">User List</a>
           <a mat-list-item routerLinkActive="mat-accent">Change Password</a>
-
         </mat-nav-list>
       </mat-expansion-panel>
 
-      <mat-expansion-panel *ngIf="false">
+      <!-- <mat-expansion-panel *ngIf="false">
         <mat-expansion-panel-header>
           Shop
         </mat-expansion-panel-header>
         <mat-nav-list dense>
           <a mat-list-item routerLink="/app-register-shop" routerLinkActive="mat-accent">Register Shop</a>
         </mat-nav-list>
-      </mat-expansion-panel>
+      </mat-expansion-panel> -->
     </mat-accordion>
 
     <!-- <mat-nav-list>
       <a mat-list-item routerLink="/app-register-user">Register User</a>
       <a mat-list-item routerLink="/app-register-shop">Register Shop</a>
-
     </mat-nav-list> -->
   </mat-sidenav>
   <mat-sidenav-content>
