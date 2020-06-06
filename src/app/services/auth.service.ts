@@ -40,18 +40,16 @@ export class AuthService {
     return this.http
       .get<User[]>(BACKEND_URL + '/all-users');
     //   .pipe(map((userList) => {
-    //     return productData.products.map(product => {
+    //     return userList.user.map(userDetail => {
     //       return {
-    //         name: product.name,
-    //         availableQuantity: product.availableQuantity,
-    //         description: product.description,
-    //         price: product.price,
-    //         id: product._id,
-    //         imagePath: product.imagePath,
-    //         createdBy: product.createdBy,
-    //         createdOn: product.createdOn,
-    //         updatedBy: product.updatedBy,
-    //         updatedOn: product.updatedOn,
+    //         id: userDetail.id,
+    //         createdOn: userDetail.createdOn,
+    //         email: userDetail.email,
+    //         firstName: userDetail.firstName,
+    //         isShopOwner: userDetail.isShopOwner,
+    //         lastName: userDetail.lastName,
+    //         password: userDetail.password,
+    //         updatedOn: userDetail.updatedOn,
     //       };
     //     });
     //   }))
@@ -79,12 +77,21 @@ export class AuthService {
     return this.http.post(BACKEND_URL + '/signup', user)
     .subscribe(() => {
       this.toastr.success('User created successfully.', 'Success');
-      this.router.navigate(['/auth/app-login']);
+      if (this.isAuthenticated) {
+        this.router.navigate(['/app-user-list']);
+      } else {
+        this.router.navigate(['/auth/app-login']);
+      }
     }, error => {
       // this.toastr.error('Some error occured.', 'Error');
       this.authStatusListener.next(false);
     });
   }
+
+  deleteUser(userId: string) {
+    debugger;
+    return this.http.delete(BACKEND_URL + '/' + userId);
+   }
 
   autoAuthUser() {
     const authInformation = this.getAuthData();

@@ -1,3 +1,8 @@
+<div *ngIf="!isLoading">
+  <button mat-raised-button color="primary"  [ngClass]="'first-button'"
+  [routerLink]="['/auth/app-signup']" >Create New User</button>
+</div>
+
 <mat-form-field>
   <mat-label>Filter</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="value">
@@ -40,7 +45,7 @@
         <mat-icon aria-label="Edit">edit</mat-icon>
       </a>
 
-      <button mat-icon-button matTooltip="Click to Delete" (click)="onDelete(element.id)" class="iconbutton" color="warn">
+      <button mat-icon-button matTooltip="Click to Delete" (click)="onDelete(element._id)" class="iconbutton" color="warn">
           <mat-icon aria-label="Delete">delete</mat-icon>
       </button>
     </td>

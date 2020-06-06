@@ -55,16 +55,16 @@ export class UserListComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  onDelete(productId) {
-    // this.isLoading = true;
-    // this.productService.deleteProduct(productId).subscribe(() => {
-    //   this.loadProducts();
-    //   this.toastr.success( 'Product deleted successfully'  , 'Success');
-    //   this.isLoading = false;
-    // },
-    // () => {
-    //   this.isLoading = false;
-    // });
+  onDelete(userId) {
+    this.isLoading = true;
+    this.authService.deleteUser(userId).subscribe(() => {
+      this.loadUsers();
+      this.toastr.success( 'User deleted successfully'  , 'Success');
+      this.isLoading = false;
+    },
+    () => {
+      this.isLoading = false;
+    });
   }
 
 }
